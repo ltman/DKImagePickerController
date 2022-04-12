@@ -53,7 +53,7 @@ public class DKAssetGroupDetailImageCell: DKAssetGroupDetailBaseCell {
             let label = UILabel()
             label.textAlignment = .center
             
-            label.layer.backgroundColor = UIColor.blue.cgColor
+            label.layer.backgroundColor = UIColor(red: 74/255, green: 105/255, blue: 255/255, alpha: 1).cgColor
             label.layer.borderColor = UIColor.white.cgColor
             label.layer.borderWidth = 2
             label.layer.cornerRadius = 8
