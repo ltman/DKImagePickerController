@@ -18,13 +18,14 @@ public class DKAssetGroupDetailCameraCell: DKAssetGroupDetailBaseCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let cameraImageView = UIImageView(frame: self.bounds)
+        let cameraImageView = UIImageView(frame: CGRect(x: 6, y: 6, width: self.bounds.width - 12, height: self.bounds.height - 12))
         cameraImageView.contentMode = .center
         cameraImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        cameraImageView.layer.backgroundColor = UIColor(white: 0.9, alpha: 1.0).cgColor
+        cameraImageView.layer.cornerRadius = 12
         cameraImageView.image = DKImagePickerControllerResource.cameraImage()
         self.contentView.addSubview(cameraImageView)
         
-        self.contentView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         self.contentView.accessibilityIdentifier = "DKImageCameraAccessibilityIdentifier"
         self.contentView.isAccessibilityElement = true
     }
