@@ -23,7 +23,6 @@ open class DKImageExtensionInlineCamera: DKImageBaseExtension {
         
         let camera = DKCamera()
         camera.didFinishCapturingImage = didFinishCapturingImage
-        camera.containsGPSInMetadata = containsGPSInMetadata
         camera.didCancel = didCancel
         
         self.checkCameraPermission(camera)
