@@ -39,7 +39,11 @@ public class DKImagePickerControllerResource: NSObject {
     }
     
     public class func cameraImage() -> UIImage {
-        return imageForResource("camera", stretchable: false, cacheable: false)
+        if #available(iOS 13.0, *) {
+            return imageForResource("ic_tool_camera", stretchable: false, cacheable: false).withTintColor(.black)
+        } else {
+            return imageForResource("ic_tool_camera", stretchable: false, cacheable: false)
+        }
     }
     
     public class func videoCameraIcon() -> UIImage {
