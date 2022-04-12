@@ -18,18 +18,20 @@ public class DKAssetGroupDetailImageCell: DKAssetGroupDetailBaseCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.thumbnailImageView.frame = self.bounds
+        self.thumbnailImageView.frame = CGRect(x: 6, y: 6, width: self.bounds.width - 12, height: self.bounds.height - 12)
         self.thumbnailImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.contentView.addSubview(self.thumbnailImageView)
         
         self.checkView.frame = self.bounds
         self.checkView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.checkView.checkImageView.tintColor = nil
-        self.checkView.checkLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        self.checkView.checkLabel.font = UIFont.boldSystemFont(ofSize: 9)
         self.checkView.checkLabel.textColor = UIColor.white
         self.contentView.addSubview(self.checkView)
         self.contentView.accessibilityIdentifier = "DKImageAssetAccessibilityIdentifier"
         self.contentView.isAccessibilityElement = true
+        
+        self.thumbnailImageView.layer.cornerRadius = 12
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,21 +40,29 @@ public class DKAssetGroupDetailImageCell: DKAssetGroupDetailBaseCell {
     
     open class DKImageCheckView: UIView {
         
-        internal lazy var checkImageView: UIImageView = {
-            let imageView = UIImageView(image: DKImagePickerControllerResource.checkedImage())
-            return imageView
+        internal lazy var checkImageView: UIView = {
+            let view = UIView()
+            view.layer.backgroundColor = UIColor.gray.cgColor
+            view.layer.cornerRadius = 8
+            view.alpha = 0.6
+            
+            return view
         }()
-        
+
         internal lazy var checkLabel: UILabel = {
             let label = UILabel()
-            label.textAlignment = .right
+            label.textAlignment = .center
+            
+            label.layer.backgroundColor = UIColor.blue.cgColor
+            label.layer.borderColor = UIColor.white.cgColor
+            label.layer.borderWidth = 2
+            label.layer.cornerRadius = 8
             
             return label
         }()
         
         override init(frame: CGRect) {
             super.init(frame: frame)
-            
             self.addSubview(self.checkImageView)
             self.addSubview(self.checkLabel)
         }
@@ -63,9 +73,8 @@ public class DKAssetGroupDetailImageCell: DKAssetGroupDetailBaseCell {
         
         override open func layoutSubviews() {
             super.layoutSubviews()
-            
-            self.checkImageView.frame = self.bounds
-            self.checkLabel.frame = CGRect(x: 0, y: 5, width: self.bounds.width - 5, height: 20)
+            self.checkImageView.frame = CGRect(x: self.bounds.width - 29, y: self.bounds.height - 31, width: 16, height: 16)
+            self.checkLabel.frame = CGRect(x: self.bounds.width - 29, y: self.bounds.height - 31, width: 16, height: 16)
         }
         
     } /* DKImageCheckView */
@@ -99,7 +108,7 @@ public class DKAssetGroupDetailImageCell: DKAssetGroupDetailBaseCell {
     
     override public var isSelected: Bool {
         didSet {
-            self.checkView.isHidden = !super.isSelected
+            self.checkView.checkLabel.isHidden = !super.isSelected
         }
     }
     

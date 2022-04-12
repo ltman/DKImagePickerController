@@ -62,6 +62,12 @@ open class DKAssetGroupDetailVC: UIViewController,
         }
 
         imagePickerController.add(observer: self)
+        
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+        } else {
+            self.view.backgroundColor = .white
+        }
 
 		let layout = imagePickerController.UIDelegate.layoutForImagePickerController(imagePickerController).init()
 		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -166,15 +172,15 @@ open class DKAssetGroupDetailVC: UIViewController,
 
         if #available(iOS 11.0, *) {
             // Handling Safe Areas for iOS 11
-            collectionView?.frame = CGRect(x: 0,
-                                           y: self.view.safeAreaInsets.top + headerViewFrame.height,
-                                           width: self.view.bounds.width,
+            collectionView?.frame = CGRect(x: 6,
+                                           y: self.view.safeAreaInsets.top + headerViewFrame.height + 6,
+                                           width: self.view.bounds.width - 12,
                                            height: self.view.bounds.height - footerViewFrame.height - headerViewFrame.height - self.view.safeAreaInsets.top)
         } else {
-            collectionView?.frame = CGRect(x: 0,
-                                           y: headerViewFrame.height,
-                                           width: self.view.bounds.width,
-                                           height: self.view.bounds.height - footerViewFrame.height - headerViewFrame.height)
+            collectionView?.frame = CGRect(x: 6,
+                                           y: headerViewFrame.height + 6,
+                                           width: self.view.bounds.width - 12,
+                                           height: self.view.bounds.height - footerViewFrame.height - headerViewFrame.height  - 12)
         }
     }
 
@@ -186,7 +192,7 @@ open class DKAssetGroupDetailVC: UIViewController,
             }
             let permissionColors = imagePickerController.permissionViewColors
             self.view.addSubview(DKPermissionView.permissionView(.photo, withColors: permissionColors))
-            self.view.backgroundColor = permissionColors.backgroundColor
+            self.view.backgroundColor = imagePickerController.UIDelegate.imagePickerControllerCollectionViewBackgroundColor()
 			self.collectionView?.isHidden = true
 		}
 

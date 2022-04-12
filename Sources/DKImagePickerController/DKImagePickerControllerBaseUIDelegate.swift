@@ -249,7 +249,7 @@ open class DKImagePickerControllerBaseUIDelegate: NSObject, DKImagePickerControl
     }
 
     open func imagePickerControllerCollectionViewBackgroundColor() -> UIColor {
-        return UIColor.white
+        return UIColor.clear
     }
 
     open func imagePickerControllerCollectionImageCell() -> DKAssetGroupDetailBaseCell.Type {
